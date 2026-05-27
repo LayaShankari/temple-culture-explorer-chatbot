@@ -176,11 +176,11 @@ export OPENAI_MODEL="gpt-4.1-mini"
 - The current retrieval system is lightweight and local. It can later be upgraded to embeddings with FAISS, ChromaDB, or another vector database.
 
 ## Team members
--Charvi Gandla
--Laya Shankari
--Garela Akshaya
--Bantu Jyothi
--Madepadege Yavaneetha
+- Charvi Gandla
+- Laya Shankari
+- Garela Akshaya
+- Bantu Jyothi
+- Madepadege Yavaneetha
 
   ## Team
 
