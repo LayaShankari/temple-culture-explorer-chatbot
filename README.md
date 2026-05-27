@@ -1,4 +1,4 @@
-# global-cultural-explorer-rag-chatbot
+# temples-cultural-explorer-rag-chatbot
 
 
 
