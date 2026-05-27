@@ -175,7 +175,7 @@ export OPENAI_MODEL="gpt-4.1-mini"
 - Keep custom temple data in the `data/` folder.
 - The current retrieval system is lightweight and local. It can later be upgraded to embeddings with FAISS, ChromaDB, or another vector database.
 
-##Team members
+## Team members
 Charvi Gandla
 Laya Shankari
 Garela Akshaya
