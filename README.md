@@ -103,9 +103,23 @@ pip install -r requirements.txt
 
 ## Run the App
 
-```bash
+Activate your virtual environment, then run Streamlit. Examples below assume you created the `.venv` environment as shown earlier.
+
+On Windows PowerShell:
+
+```powershell
+.venv\Scripts\activate
 streamlit run streamlit_app.py
 ```
+
+On macOS/Linux:
+
+```bash
+source .venv/bin/activate
+streamlit run streamlit_app.py
+```
+
+Either `streamlit run streamlit_app.py` or `streamlit run app.py` will work; a small wrapper `streamlit_app.py` is included to call `main()` from `app.py`.
 
 Then open the local URL shown in the terminal, usually:
 
