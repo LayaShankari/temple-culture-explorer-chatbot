@@ -1,198 +1,187 @@
-# Temple Explorer RAG Chatbot
+# Temple Culture Explorer
 
-An AI-powered Retrieval-Augmented Generation (RAG) chatbot designed to help users explore temples, cultural heritage, traditions, festivals, mythology, architecture, and spiritual history across India.
+Temple Culture Explorer is a Retrieval-Augmented Generation (RAG) chatbot built with Streamlit. It helps users explore famous Indian temples, sacred sites, architecture, rituals, festivals, pilgrimage etiquette, and cultural heritage using a local knowledge base.
 
-The chatbot retrieves relevant information from temple and cultural datasets and generates intelligent responses using Large Language Models (LLMs).
-
----
+The app works even without an API key by retrieving the most relevant local content. If an OpenAI API key is available, it can generate a more polished answer using the retrieved context.
 
 ## Features
 
-- Temple information search
-- Cultural and historical exploration
-- Festival and ritual details
-- Temple architecture insights
-- Mythology-based Q&A
-- Intelligent document retrieval using RAG
-- Interactive chatbot interface
-- Fast semantic search using vector databases
-
----
-
-## Project Objectives
-
-The main objective of this project is to build a smart AI assistant that can:
-
-- Answer questions about temples and culture
-- Retrieve accurate information from stored datasets
-- Provide educational and tourism-related guidance
-- Preserve and promote cultural heritage digitally
-
----
+- Streamlit chatbot interface
+- Local RAG-style retrieval from temple knowledge files
+- Supports `.md` and `.txt` files inside the `data/` folder
+- Separate text files for famous temples and sacred sites in India
+- Sidebar list of loaded knowledge files
+- Reload button to refresh the knowledge base after adding new files
+- Optional OpenAI-powered answer generation
+- Works in fallback mode without an LLM API key
 
 ## Tech Stack
 
-### Frontend
-- HTML
-- CSS
-- JavaScript
-
-### Backend
 - Python
-- Flask / FastAPI
-
-### AI & RAG
-- LangChain
-- Sentence Transformers
-- OpenAI / Gemini / Ollama
-- FAISS / ChromaDB
-
----
+- Streamlit
+- scikit-learn
+- TF-IDF vectorization
+- Cosine similarity retrieval
+- Optional OpenAI API integration
 
 ## Project Structure
 
-```plaintext
-temple-explorer-rag-chatbot/
-│
-├── frontend/
-│   ├── index.html
-│   ├── style.css
-│   └── app.js
-│
-├── backend/
-│   ├── app.py
-│   ├── rag_pipeline.py
-│   ├── embeddings.py
-│   └── requirements.txt
-│
-├── datasets/
-│   ├── temple_history/
-│   ├── festivals/
-│   ├── mythology/
-│   ├── architecture/
-│   └── traditions/
-│
-├── vector_db/
-├── embeddings/
-├── docs/
+```text
+global-cultural-explorer-rag-chatbot/
+├── data/
+│   ├── akshardham_delhi.txt
+│   ├── brihadeeswara_temple.txt
+│   ├── dwarkadhish_temple.txt
+│   ├── jagannath_temple_puri.txt
+│   ├── kashi_vishwanath_temple.txt
+│   ├── kedarnath_temple.txt
+│   ├── meenakshi_amman_temple.txt
+│   ├── temple_culture_notes.md
+│   └── ...
+├── streamlit_app.py
+├── requirements.txt
 ├── README.md
 └── .gitignore
 ```
 
----
+## Included Knowledge Base
 
-## Dataset Sources
+The app includes information about several famous temples and sacred sites, including:
 
-The chatbot dataset may include information collected from:
-
-- UNESCO cultural resources
-- Government tourism websites
-- Temple history articles
-- Wikipedia
-- Cultural blogs and archives
-- Publicly available PDFs and documents
-
----
-
-## Example User Queries
-
-- “Tell me about Tirupati Temple.”
-- “Which temples are famous in South India?”
-- “Explain Dravidian temple architecture.”
-- “What festivals are celebrated at Meenakshi Temple?”
-- “Who built the Brihadeeswara Temple?”
-
----
-
-## RAG Workflow
-
-1. Collect temple and cultural documents
-2. Clean and preprocess data
-3. Generate embeddings
-4. Store embeddings in vector database
-5. Retrieve relevant documents
-6. Send retrieved context to LLM
-7. Generate intelligent responses
-
----
+- Kashi Vishwanath Temple, Varanasi
+- Sri Venkateswara Temple, Tirumala
+- Jagannath Temple, Puri
+- Somnath Temple, Gujarat
+- Kedarnath Temple, Uttarakhand
+- Ramanathaswamy Temple, Rameswaram
+- Meenakshi Amman Temple, Madurai
+- Brihadeeswara Temple, Thanjavur
+- Konark Sun Temple, Odisha
+- Kamakhya Temple, Guwahati
+- Vaishno Devi Temple, Katra
+- Dwarkadhish Temple, Dwarka
+- Siddhivinayak Temple, Mumbai
+- Lingaraja Temple, Bhubaneswar
+- Virupaksha Temple, Hampi
+- Kandariya Mahadeva Temple, Khajuraho
+- Swaminarayan Akshardham, Delhi
+- Mahabodhi Temple, Bodh Gaya
+- Golden Temple, Amritsar
 
 ## Installation
 
-### Clone Repository
+Clone the repository:
 
 ```bash
-git clone https://gitlab.com/your-username/temple-explorer-rag-chatbot.git
+git clone https://code.swecha.org/Charvi_Gandla/global-cultural-explorer-rag-chatbot.git
+cd global-cultural-explorer-rag-chatbot
 ```
 
-### Move into Project Folder
+Create and activate a virtual environment:
 
 ```bash
-cd temple-explorer-rag-chatbot
+python -m venv .venv
 ```
 
-### Create Virtual Environment
+On Windows:
+
+```powershell
+.venv\Scripts\activate
+```
+
+On macOS/Linux:
 
 ```bash
-python -m venv venv
+source .venv/bin/activate
 ```
 
-### Activate Virtual Environment
-
-#### Windows
-
-```bash
-venv\Scripts\activate
-```
-
-#### Mac/Linux
-
-```bash
-source venv/bin/activate
-```
-
-### Install Requirements
+Install dependencies:
 
 ```bash
 pip install -r requirements.txt
 ```
 
----
-
-## Run the Project
+## Run the App
 
 ```bash
-python app.py
+streamlit run streamlit_app.py
 ```
 
----
+Then open the local URL shown in the terminal, usually:
 
-## Future Enhancements
+```text
+http://localhost:8501
+```
 
-- Voice-enabled chatbot
-- Multilingual temple support
-- Temple recommendation system
-- Interactive maps
-- Festival calendar integration
-- Mobile application support
+## How It Works
 
----
+1. The app reads `.md` and `.txt` files from the `data/` folder.
+2. Markdown files are split by `## Section Title` headings.
+3. Text files use the first non-empty line as the temple title.
+4. The app creates TF-IDF vectors for all knowledge chunks.
+5. When a user asks a question, cosine similarity finds the most relevant chunks.
+6. The answer is generated from retrieved context or displayed directly when no API key is set.
 
-## Team Members
+## Add More Temple Files
 
-- Charvi
-- Akshaya
-- Jyothi
-- Laya
-- Yavaneetha
+Add a new `.txt` file inside the `data/` folder.
 
----
+Use this format:
 
-## License
+```text
+Temple Name, Location
 
-This project is developed for educational and internship purposes.
+Write temple history, architecture, rituals, festivals, cultural importance, visitor etiquette, and travel notes here.
+```
 
----
+After adding or editing files, click **Reload knowledge base** in the app sidebar or restart Streamlit.
 
-## Acknowledgement
+## Optional OpenAI Generation
 
-Special thanks to all open-source communities, cultural resources, and AI technologies that made this project possible.
+The app works without OpenAI. To enable generated answers, set an API key before running the app.
+
+On Windows PowerShell:
+
+```powershell
+$env:OPENAI_API_KEY="your_api_key_here"
+streamlit run streamlit_app.py
+```
+
+On macOS/Linux:
+
+```bash
+export OPENAI_API_KEY="your_api_key_here"
+streamlit run streamlit_app.py
+```
+
+You can optionally set a model:
+
+```bash
+export OPENAI_MODEL="gpt-4.1-mini"
+```
+
+## Example Questions
+
+- Tell me about Tirumala Venkateswara Temple.
+- Which temple is famous for Ratha Yatra and Mahaprasad?
+- Explain Dravidian temple architecture.
+- What should I know before visiting Kedarnath?
+- Which temples are important in Odisha?
+- Tell me about festivals at Meenakshi Amman Temple.
+
+## Notes
+
+- Do not commit API keys or secrets.
+- Keep custom temple data in the `data/` folder.
+- The current retrieval system is lightweight and local. It can later be upgraded to embeddings with FAISS, ChromaDB, or another vector database.
+
+##Team members
+Charvi Gandla
+Laya Shankari
+Garela Akshaya
+Bantu Jyothi
+Madepadege Yavaneetha
+
+  ## Team
+
+Developed for an internship project on cultural heritage exploration using RAG.
