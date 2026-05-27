@@ -120,12 +120,12 @@ def generate_with_openai(question: str, matches: list[tuple[Chunk, float]]) -> s
         from openai import OpenAI
 
         client = OpenAI(api_key=api_key)
-        response = client.responses.create(
-            model=os.getenv("OPENAI_MODEL", "gpt-4.1-mini"),
-            input=build_prompt(question, matches),
+        response = client.chat.completions.create(
+            model=os.getenv("OPENAI_MODEL", "gpt-3.5-turbo"),
+            messages=[{"role": "user", "content": build_prompt(question, matches)}],
             temperature=0.2,
         )
-        return response.output_text
+        return response.choices[0].message.content
     except Exception as exc:
         return f"OpenAI generation failed, so here is retrieved context instead.\n\nError: {exc}"
 
